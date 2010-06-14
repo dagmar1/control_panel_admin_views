@@ -1,0 +1,30 @@
+<?php
+
+include_once('control_panel_admin_views.features.inc');
+
+/**
+ * Implementation of hook_perm().
+ */
+function control_panel_admin_views_perm() {
+  return array(
+    'administer content as administrator',
+    'administer content as moderator',
+    'administer content as editor',
+    
+    'administer comments as administrator',
+    'administer comments as moderator',
+    'administer comments as editor',
+    
+    'administer users as administrator',
+    'administer users as moderator',
+    'administer users as editor',
+  );
+}
+
+/**
+ * Implementation of hook_menu_alter().
+ */
+function control_panel_admin_views_menu_alter(&$items) {
+  $items['admin/user/user/create']['access callback'] = 'user_access';
+  $items['admin/user/user/create']['access arguments'] = array('administer users');
+} 
