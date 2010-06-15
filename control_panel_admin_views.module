@@ -27,4 +27,6 @@ function control_panel_admin_views_perm() {
 function control_panel_admin_views_menu_alter(&$items) {
   $items['admin/user/user/create']['access callback'] = 'user_access';
   $items['admin/user/user/create']['access arguments'] = array('administer users');
+  $items['admin/content/comment']['access callback'] = 'user_access';
+  $items['admin/content/comment']['access arguments'] = array('administer comments');
 } 

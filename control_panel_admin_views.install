@@ -8,3 +8,21 @@
 function control_panel_admin_views_install() {
   db_query("UPDATE {system} SET weight = 10 WHERE name = 'control_panel_admin_views'");
 } 
+
+/**
+ * Implementation of hook_enable().
+ */
+function control_panel_admin_views_enable() {
+  // Disable views created by admin_views
+  $views_status = variable_get('views_defaults', array());
+  $views_status['admin_content_comment'] = TRUE; // True is disabled
+  $views_status['admin_content_node'] = TRUE; // True is disabled
+  $views_status['admin_user_user'] = TRUE; // True is disabled
+
+  // And the view created by views_bulk_operations
+  $views_status['admin_content'] = TRUE; // True is disabled
+  
+  variable_set('views_defaults', $views_status);
+  views_invalidate_cache();
+  menu_rebuild();
+}
